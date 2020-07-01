@@ -95,9 +95,9 @@
       }
     }
 
-    // function logIn() {
-    //   liff.login({ redirectUri: window.location.href })
-    // }
+    function logIn() {
+      liff.login({ redirectUri: window.location.href })
+    }
 
     async function main() {
       await liff.init({ liffId: "1654393024-rak211lG" })
@@ -112,7 +112,7 @@
           getEnvironment()
           getUserProfile()
         } else {
-          console.log('not login')
+          logIn()
         }
       }
     }
