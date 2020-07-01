@@ -73,12 +73,10 @@
 
     async function getUserProfile() {
       const profile = await liff.getProfile()
-      console.log(profile)
       document.getElementById('pictureUrl').src = profile.pictureUrl
       document.getElementById('userId').append(profile.userId)
       document.getElementById('statusMessage').append(profile.statusMessage)
       document.getElementById('displayName').append(profile.displayName)
-      document.getElementById('decodedIDToken').append(liff.getDecodedIDToken().email)
     }
 
     function getEnvironment() {
@@ -96,13 +94,21 @@
       }
     }
 
+    function logIn() {
+      liff.login({ redirectUri: "https://sutthichaiphonchai.github.io/liff/" })
+    }
+
     async function main() {
       await liff.init({ liffId: "1654393024-rak211lG" })
-      getEnvironment()
-      getUserProfile()
-      // getContext()
-      // getFriendship()
-      // createUniversalLink()
+      if (liff.isInClient()) {
+        getEnvironment()
+        getUserProfile()
+        // getContext()
+        // getFriendship()
+        // createUniversalLink()
+      } else {
+        logIn()
+      }
     }
     main()
   </script>
