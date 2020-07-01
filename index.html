@@ -52,6 +52,8 @@
     }
 
     function logOut() {
+      liff.logout()
+      window.location.reload()
     }
 
     function closed() {
@@ -70,6 +72,11 @@
     }
 
     function getContext() {
+      document.getElementById('type').append(liff.getContext().type)
+      document.getElementById('viewType').append(liff.getContext().viewType)
+      document.getElementById('utouId').append(liff.getContext().utouId)
+      document.getElementById('roomId').append(liff.getContext().roomId)
+      document.getElementById('groupId').append(liff.getContext().groupId)
     }
 
     async function getUserProfile() {
@@ -100,23 +107,19 @@
       liff.login({ redirectUri: window.location.href })
     }
 
-    function logOut() {
-      liff.logout()
-      window.location.reload()
-    }
-
     async function main() {
       await liff.init({ liffId: "1654393024-rak211lG" })
       if (liff.isInClient()) {
         getEnvironment()
         getUserProfile()
-        // getContext()
+        getContext()
         // getFriendship()
         // createUniversalLink()
       } else {
         if (liff.isLoggedIn()) {
           getEnvironment()
           getUserProfile()
+          getContext()
         } else {
           logIn()
         }
