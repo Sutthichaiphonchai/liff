@@ -35,6 +35,7 @@
   <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button>
+  <button id="btnLogIn" onclick="logIn()">Log In</button>
 
   <!-- <script src="js/vconsole.min.js"></script> -->
   <!-- <script>
@@ -107,7 +108,12 @@
         // getFriendship()
         // createUniversalLink()
       } else {
-        logIn()
+        if (liff.isLoggedIn()) {
+          getEnvironment()
+          getUserProfile()
+        } else {
+          console.log('not login')
+        }
       }
     }
     main()
