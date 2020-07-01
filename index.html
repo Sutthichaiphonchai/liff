@@ -66,9 +66,26 @@
     }
 
     async function getFriendship() {
+      const friend = await liff.getFriendship()
+      document.getElementById('friendship').append(friend.friendFlag)
+      if (!friend.friendFlag) { 
+        if ( confirm('คุณยังไม่ได้เพิ่ม bot เป็นเพื่อน จะเพิ่มเลยไหม  ? ') ) {
+          window.location = 'htpps://line.me/R/ti/p/@@857gqbz'
+        }
+      }
     }
 
     async function sendMsg() {
+      if (liff.getContext().type !== "none" && liff.getContext().type !== "external") {
+        await liff.sendMessages([
+          {
+            "type":"sticker",
+            "stickerId" : 1,
+            "packageId" : 1
+          }
+        ])
+        alert('Message sent')
+     }
     }
 
     function getContext() {
@@ -113,13 +130,15 @@
         getEnvironment()
         getUserProfile()
         getContext()
-        // getFriendship()
+        getFriendship()
         // createUniversalLink()
       } else {
         if (liff.isLoggedIn()) {
           getEnvironment()
           getUserProfile()
           getContext()
+          getFriendship()
+
         } else {
           logIn()
         }
